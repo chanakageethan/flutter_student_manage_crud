@@ -39,7 +39,14 @@ class _ViewStudentsScreenState extends State<ViewStudentsScreen> {
                           builder: (context) => const ManageStudentScreen()),
                     );
                   },
-                  child: Text(items[index])),
+                  child: Container(
+                      color: Theme.of(context).colorScheme.primary,
+
+                      child: Text(items[index],
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                      ))),
             );
           },
         ),

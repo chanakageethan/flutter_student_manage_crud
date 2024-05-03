@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Card(
+              color: Theme.of(context).colorScheme.primary,
               clipBehavior: Clip.hardEdge,
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
@@ -39,11 +40,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: SizedBox(
                   width: width / 1.5,
                   height: height / 5,
-                  child: const Center(child: Text('View Students')),
+                  child: Center(
+                      child: Text(
+                    'View Students',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                  )),
                 ),
               ),
             ),
             Card(
+              color: Theme.of(context).colorScheme.primary,
               clipBehavior: Clip.hardEdge,
               child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
@@ -57,7 +65,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: SizedBox(
                   width: width / 1.5,
                   height: height / 5,
-                  child: const Center(child: Text('Add Students')),
+                  child: Center(
+                      child: Text(
+                    'Add Students',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.tertiary,
+                        ),
+                  )),
                 ),
               ),
             ),
