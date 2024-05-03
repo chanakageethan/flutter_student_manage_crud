@@ -21,7 +21,12 @@ class _ViewStudentsScreenState extends State<ViewStudentsScreen> {
           icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text("View Students"),
+        title: Text("View Students",
+
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -40,11 +45,23 @@ class _ViewStudentsScreenState extends State<ViewStudentsScreen> {
                     );
                   },
                   child: Container(
-                      color: Theme.of(context).colorScheme.primary,
+                      height: height /10,
+                      width: width/1.5,
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primary,
+                          border: Border.all(
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(20))
+                      ),
 
-                      child: Text(items[index],
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.tertiary,
+
+
+                      child: Center(
+                        child: Text(items[index],
+                          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                            color: Theme.of(context).colorScheme.tertiary,
+                          ),
                         ),
                       ))),
             );

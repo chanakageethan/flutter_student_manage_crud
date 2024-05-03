@@ -10,6 +10,23 @@ class AddStudentScreen extends StatefulWidget {
 class _AddStudentScreenState extends State<AddStudentScreen> {
   final _formKey = GlobalKey<FormState>();
 
+  final idController = TextEditingController();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final mobileController = TextEditingController();
+  final addressController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    idController.dispose();
+    nameController.dispose();
+    emailController.dispose();
+    mobileController.dispose();
+    addressController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -21,12 +38,12 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: Text("Add Students", style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .copyWith(
-            color: Theme.of(context).colorScheme.tertiary,
-          ),),
+          title: Text(
+            "Add Student",
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+          ),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -40,6 +57,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                   child: Column(
                     children: <Widget>[
                       TextFormField(
+                        controller:idController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter some text';
@@ -55,6 +73,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                         height: height * 0.02,
                       ),
                       TextFormField(
+                        controller:nameController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter the name';
@@ -70,6 +89,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                         height: height * 0.02,
                       ),
                       TextFormField(
+                        controller:emailController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter the email';
@@ -85,6 +105,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                         height: height * 0.02,
                       ),
                       TextFormField(
+                        controller:mobileController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter the Mobile';
@@ -100,6 +121,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                         height: height * 0.02,
                       ),
                       TextFormField(
+                        controller:addressController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter the Address';
@@ -116,11 +138,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Processing Data')),
-                            );
-                          }
+                          saveStudent();
                         },
                         child: const Text('Save Student'),
                       ),
@@ -133,5 +151,30 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
         ),
       ),
     );
+  }
+
+
+  void saveStudent(){
+    if (_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Processing Data')),
+      );
+               var id = idController.text.toString();
+               var name = nameController.text.toString();
+               var email = emailController.text.toString();
+               var mobile = mobileController.text.toString();
+               var address = addressController.text.toString();
+
+
+               print(id);
+               print(name);
+               print(email);
+               print(mobile);
+               print(address);
+
+
+
+
+    }
   }
 }
