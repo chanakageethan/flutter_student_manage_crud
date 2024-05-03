@@ -50,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: height / 6,
                           child: Center(
                               child: Text(
-                            'Add Students',
+                            'Add Student',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium!

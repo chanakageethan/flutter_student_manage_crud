@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../models/student.dart';
+
 class ManageStudentScreen extends StatefulWidget {
-  const ManageStudentScreen({super.key});
+  final Student student;
+
+  const ManageStudentScreen({super.key, required this.student});
 
   @override
   State<ManageStudentScreen> createState() => _ManageStudentScreenState();
@@ -10,21 +14,27 @@ class ManageStudentScreen extends StatefulWidget {
 class _ManageStudentScreenState extends State<ManageStudentScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final idController = TextEditingController();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
-  final mobileController = TextEditingController();
-  final addressController = TextEditingController();
+  final cityController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    nameController.text = widget.student.name;
+    emailController.text = widget.student.email;
+    cityController.text = widget.student.city;
+  }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    idController.dispose();
     nameController.dispose();
     emailController.dispose();
-    mobileController.dispose();
-    addressController.dispose();
+    cityController.dispose();
   }
 
   @override
@@ -35,14 +45,14 @@ class _ManageStudentScreenState extends State<ManageStudentScreen> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.primary),
             onPressed: () => Navigator.of(context).pop(),
           ),
           title: Text(
             "Manage Student",
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: Theme.of(context).colorScheme.primary,
-            ),
+                  color: Theme.of(context).colorScheme.primary,
+                ),
           ),
           centerTitle: true,
         ),
@@ -57,32 +67,16 @@ class _ManageStudentScreenState extends State<ManageStudentScreen> {
                   child: Column(
                     children: <Widget>[
                       TextFormField(
-                        controller: idController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
-                          }
-                          return null;
-                        },
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'ID',
-                        ),
-                      ),
-                      SizedBox(
-                        height: height * 0.02,
-                      ),
-                      TextFormField(
                         controller: nameController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter the name';
+                            return 'Please enter the full Name';
                           }
                           return null;
                         },
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: 'Name',
+                          hintText: 'Full Name',
                         ),
                       ),
                       SizedBox(
@@ -93,6 +87,12 @@ class _ManageStudentScreenState extends State<ManageStudentScreen> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter the email';
+                          }
+                          // Regular expression for validating email format
+                          final emailRegex =
+                              RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                          if (!emailRegex.hasMatch(value)) {
+                            return 'Please enter a valid email';
                           }
                           return null;
                         },
@@ -105,32 +105,16 @@ class _ManageStudentScreenState extends State<ManageStudentScreen> {
                         height: height * 0.02,
                       ),
                       TextFormField(
-                        controller: mobileController,
+                        controller: cityController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter the Mobile';
+                            return 'Please enter the city';
                           }
                           return null;
                         },
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: 'Mobile',
-                        ),
-                      ),
-                      SizedBox(
-                        height: height * 0.02,
-                      ),
-                      TextFormField(
-                        controller: addressController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter the Address';
-                          }
-                          return null;
-                        },
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Address',
+                          hintText: 'City',
                         ),
                       ),
                       SizedBox(
@@ -169,22 +153,19 @@ class _ManageStudentScreenState extends State<ManageStudentScreen> {
 
   void editStudent() {
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Processing Data')),
-      );
-      var id = idController.text.toString();
       var name = nameController.text.toString();
       var email = emailController.text.toString();
-      var mobile = mobileController.text.toString();
-      var address = addressController.text.toString();
+      var city = cityController.text.toString();
 
-      print(id);
-      print(name);
-      print(email);
-      print(mobile);
-      print(address);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('SUCCESS  : $name  $email  $city')),
+      );
     }
   }
 
-  void deleteStudent() {}
+  void deleteStudent() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('DELETE ')),
+    );
+  }
 }

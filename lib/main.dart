@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_student_manage_crud/ui/home/home_screen.dart';
 import 'package:flutter_student_manage_crud/ui/manage_students/add_student_screen.dart';
 import 'package:flutter_student_manage_crud/ui/manage_students/view_students_screen.dart';
+import 'package:flutter_student_manage_crud/utils/custom_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
@@ -19,12 +20,13 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         // Define the default brightness and colors.
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.green,
-          primary: Colors.green,
-          secondary: Colors.greenAccent,
-          tertiary: Colors.white,
-          background: Colors.white,
+          seedColor: ColorManager.primary,
+          primary: ColorManager.primary,
+          secondary: ColorManager.secondary,
+          tertiary: ColorManager.tertiary,
+          background: ColorManager.background,
           brightness: Brightness.light,
+          error: ColorManager.error
         ),
 
         textTheme: TextTheme(

@@ -10,21 +10,18 @@ class AddStudentScreen extends StatefulWidget {
 class _AddStudentScreenState extends State<AddStudentScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final idController = TextEditingController();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
-  final mobileController = TextEditingController();
-  final addressController = TextEditingController();
+  final cityController = TextEditingController();
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    idController.dispose();
+
     nameController.dispose();
     emailController.dispose();
-    mobileController.dispose();
-    addressController.dispose();
+    cityController.dispose();
   }
 
   @override
@@ -35,7 +32,7 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(Icons.arrow_back, color: Theme.of(context).colorScheme.primary),
             onPressed: () => Navigator.of(context).pop(),
           ),
           title: Text(
@@ -57,42 +54,32 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                   child: Column(
                     children: <Widget>[
                       TextFormField(
-                        controller:idController,
+                        controller: nameController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter some text';
+                            return 'Please enter the full Name';
                           }
                           return null;
                         },
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: 'ID',
+                          hintText: 'Full Name',
                         ),
                       ),
                       SizedBox(
                         height: height * 0.02,
                       ),
                       TextFormField(
-                        controller:nameController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter the name';
-                          }
-                          return null;
-                        },
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Name',
-                        ),
-                      ),
-                      SizedBox(
-                        height: height * 0.02,
-                      ),
-                      TextFormField(
-                        controller:emailController,
+                        controller: emailController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter the email';
+                          }
+                          // Regular expression for validating email format
+                          final emailRegex =
+                              RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                          if (!emailRegex.hasMatch(value)) {
+                            return 'Please enter a valid email';
                           }
                           return null;
                         },
@@ -105,32 +92,16 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
                         height: height * 0.02,
                       ),
                       TextFormField(
-                        controller:mobileController,
+                        controller: cityController,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Please enter the Mobile';
+                            return 'Please enter the city';
                           }
                           return null;
                         },
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          hintText: 'Mobile',
-                        ),
-                      ),
-                      SizedBox(
-                        height: height * 0.02,
-                      ),
-                      TextFormField(
-                        controller:addressController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter the Address';
-                          }
-                          return null;
-                        },
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: 'Address',
+                          hintText: 'City',
                         ),
                       ),
                       SizedBox(
@@ -153,28 +124,15 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
     );
   }
 
-
-  void saveStudent(){
+  void saveStudent() {
     if (_formKey.currentState!.validate()) {
+      var name = nameController.text.toString();
+      var email = emailController.text.toString();
+      var city = cityController.text.toString();
+
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Processing Data')),
+        SnackBar(content: Text('SUCCESS  : $name  $email  $city')),
       );
-               var id = idController.text.toString();
-               var name = nameController.text.toString();
-               var email = emailController.text.toString();
-               var mobile = mobileController.text.toString();
-               var address = addressController.text.toString();
-
-
-               print(id);
-               print(name);
-               print(email);
-               print(mobile);
-               print(address);
-
-
-
-
     }
   }
 }

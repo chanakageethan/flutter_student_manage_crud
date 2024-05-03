@@ -2,11 +2,12 @@
 import 'dart:ui';
 
 class ColorManager {
-  static Color  backgroundColor =   Color(0xFFFFFFFF);
-  static Color  gray =  const Color(0xFFEEEEEE);
-  static Color  white =  const Color(0xFFFFFFFF);
-  static Color  textColor =  const Color(0xFF000000);
-  static Color  buttonColor =  const Color(0xFF1c1c25);
-  static Color black = const Color(0xFF1c1c25);
+  static Color  primary =   Color(0xFF6200EE);
+  static Color  secondary =  const Color(0xFF03DAC6);
+  static Color  tertiary =  const Color(0xFFFFFFFF);
+  static Color  background =  const Color(0xFFFFFFFF);
+  static Color  error =  const Color(0xFFB00020);
+
+
 
 }
