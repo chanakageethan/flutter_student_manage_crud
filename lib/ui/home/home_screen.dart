@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_student_manage_crud/ui/manage_students/add_student_screen.dart';
 import 'package:flutter_student_manage_crud/ui/manage_students/view_students_screen.dart';
 
@@ -16,65 +18,82 @@ class _HomeScreenState extends State<HomeScreen> {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home"),
+        // title: const Text("Home"),
         centerTitle: true,
       ),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
+        height: double.infinity,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Card(
-              color: Theme.of(context).colorScheme.primary,
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                splashColor: Colors.blue.withAlpha(30),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ViewStudentsScreen()),
-                  );
-                },
-                child: SizedBox(
-                  width: width / 1.5,
-                  height: height / 5,
-                  child: Center(
-                      child: Text(
-                    'View Students',
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.tertiary,
+
+            Expanded(
+              child: Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Card(
+                      color: Theme.of(context).colorScheme.primary,
+                      clipBehavior: Clip.hardEdge,
+                      child: InkWell(
+                        splashColor: Colors.blue.withAlpha(30),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AddStudentScreen()),
+                          );
+                        },
+                        child: SizedBox(
+                          width: width / 2.5,
+                          height: height / 6,
+                          child: Center(
+                              child: Text(
+                            'Add Students',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                ),
+                          )),
                         ),
-                  )),
+                      ),
+                    ),
+                    Card(
+                      color: Theme.of(context).colorScheme.primary,
+                      clipBehavior: Clip.hardEdge,
+                      child: InkWell(
+                        splashColor: Colors.blue.withAlpha(30),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const ViewStudentsScreen()),
+                          );
+                        },
+                        child: SizedBox(
+                          width: width / 2.5,
+                          height: height / 6,
+                          child: Center(
+                              child: Text(
+                            'View Students',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                ),
+                          )),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ),
-            Card(
-              color: Theme.of(context).colorScheme.primary,
-              clipBehavior: Clip.hardEdge,
-              child: InkWell(
-                splashColor: Colors.blue.withAlpha(30),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AddStudentScreen()),
-                  );
-                },
-                child: SizedBox(
-                  width: width / 1.5,
-                  height: height / 5,
-                  child: Center(
-                      child: Text(
-                    'Add Students',
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: Theme.of(context).colorScheme.tertiary,
-                        ),
-                  )),
-                ),
-              ),
-            ),
+            )
           ],
         ),
       ),

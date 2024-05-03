@@ -21,7 +21,12 @@ class _AddStudentScreenState extends State<AddStudentScreen> {
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: Text("Add Students"),
+          title: Text("Add Students", style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(
+            color: Theme.of(context).colorScheme.tertiary,
+          ),),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
