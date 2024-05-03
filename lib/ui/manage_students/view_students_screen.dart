@@ -52,7 +52,7 @@ class _ViewStudentsScreenState extends State<ViewStudentsScreen> {
                           border: Border.all(
                             color: Theme.of(context).colorScheme.primary,
                           ),
-                          borderRadius: BorderRadius.all(Radius.circular(20))
+                          borderRadius: BorderRadius.all(Radius.circular(8))
                       ),
 
 
